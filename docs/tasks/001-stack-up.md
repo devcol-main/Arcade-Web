@@ -90,17 +90,17 @@ shared/leaderboard/  # LeaderboardService 인터페이스 + LocalLeaderboardServ
 
 ## 완료 조건
 ### 자동 검증
-- [ ] `npm run check` 통과 (타입체크 + Vitest)
-- [ ] core: 정확히 겹침 → 폭 유지, Perfect
-- [ ] core: 일부 겹침 → 겹친 폭만 남고 위치 갱신
-- [ ] core: 안 겹침 → 게임 오버, 이후 입력 무시
-- [ ] core: Perfect 허용치 경계값
-- [ ] core: Perfect N연속 폭 회복, W0 초과 안 함
-- [ ] core: 속도 증가와 상한
-- [ ] core: 점수 계산 (기본, 보너스, 콤보 상한)
-- [ ] core: 같은 시드면 같은 결과
-- [ ] leaderboard Mock: 저장, Top N 정렬, 동점, localStorage 사용 불가 시에도 오류 없이 동작
-- [ ] 빌드 용량: 사운드 제외 300KB 이하 (gzip 전 기준, 측정 후 조정)
+- [x] `npm run check` 통과 (타입체크 + Vitest)
+- [x] core: 정확히 겹침 → 폭 유지, Perfect
+- [x] core: 일부 겹침 → 겹친 폭만 남고 위치 갱신
+- [x] core: 안 겹침 → 게임 오버, 이후 입력 무시
+- [x] core: Perfect 허용치 경계값
+- [x] core: Perfect N연속 폭 회복, W0 초과 안 함
+- [x] core: 속도 증가와 상한
+- [x] core: 점수 계산 (기본, 보너스, 콤보 상한)
+- [x] core: 같은 시드면 같은 결과
+- [x] leaderboard Mock: 저장, Top N 정렬, 동점, localStorage 사용 불가 시에도 오류 없이 동작
+- [x] 빌드 용량: 사운드 제외 300KB 이하 (gzip 전 기준, 측정 후 조정) — 실측 88K (JS 33KB, 폰트 29KB, CSS 6KB)
 
 ### 수동 확인 (사람)
 - [ ] PC 브라우저, iOS Safari, Android Chrome에서 60fps 근처
