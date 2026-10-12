@@ -7,3 +7,4 @@ Unity 파이프라인(`devcol-arcade`)과 검사 속도, 환경 문제 유무, �
 |---|---|---|---|---|---|---|---|---|
 | 2026-10-13 | 001 Stack Up | 1. 골격 + shared/leaderboard (인터페이스, LocalLeaderboardService, 테스트) | sonnet | 2 | PASS (16/16) | PASS (1차 CHANGES_REQUESTED: 쓰기 실패 시 점수 소실, undefined 테스트 비결정성) | 완료 | 시작 시 환경 ERROR 1회(ts 네이티브 바이너리 누락) → 사용자가 npm ci로 해결. docs/mockups/stack-up-neon.html 없음 |
 | 2026-10-13 | 001 Stack Up | 2. core 로직 (config, rng, StackUpLogic) + 테스트 | sonnet | 1 | PASS (40/40) | PASS | 완료 | 정정: 시안 docs/mockups/stack-up-neon.html은 이후 저장소에 추가되어 참고함. non-blocking 이월: dt NaN/음수 방어(7번에서 main이 clamp), regrow amount 0 이벤트는 view에서 amount>0일 때만 연출, 스폰 위치 체감 확인 |
+| 2026-10-13 | 001 Stack Up | 3. view (블록, 조각 풀, 카메라, 그리드, 글로우 스프라이트, 레이어 확장 지점) + 임시 main | sonnet | 1 | PASS (57/57) | PASS | 완료 | 빌드 16K. non-blocking 이월: viewPieces.test toContain 무의미 단언 교체, PiecePool(0) 방어, 0.3/0.05 상수 config 이동(6번), 화면 흔들림 오프셋 render()에 추가(4번), iframe ResizeObserver(7번) |
