@@ -20,7 +20,7 @@ if (!Number.isInteger(SEED)) {
 }
 const W = 390;
 const H = 844;
-const MAX_GIF_BYTES = 5 * 1024 * 1024;
+const MAX_GIF_BYTES = 8 * 1024 * 1024;
 const SEND_TIMEOUT_MS = 15000;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -214,8 +214,8 @@ async function captureStills(port, url, outputs) {
     await cdp.waitFor(`document.getElementById('options').hidden`, 3000, 'options close');
 
     await pressSpace(cdp); // 타이틀 첫 탭 = 시작
-    await startBot(cdp, 5); // 5층 도달(Perfect + 마일스톤) 순간에 멈춘다
-    await waitBot(cdp, 'window.__bot.holding', 30000, 'bot reaching floor 5');
+    await startBot(cdp, 10); // 10층 도달(Perfect + 마일스톤 + 카메라 상승) 순간에 멈춘다
+    await waitBot(cdp, 'window.__bot.holding', 30000, 'bot reaching floor 10');
     await sleep(120);
     outputs.push(await shot(cdp, 'gameplay.png'));
     await cdp.eval(`window.__bot.released = true; window.__bot.holding = false`);
@@ -249,7 +249,7 @@ async function captureGif(port, url, tmp, outputs) {
     await startBot(cdp, -1);
     await waitBot(cdp, 'window.__bot.done', 40000, 'bot finishing');
     await waitBoard(cdp);
-    await sleep(1600); // 게임 오버/Top 10 장면
+    await sleep(2500); // 게임 오버/Top 10 장면
     await cdp.send('Page.stopScreencast');
     const result = await botResult(cdp);
     if (frames.length < 10) throw new Error(`Too few screencast frames: ${frames.length}`);
@@ -269,7 +269,7 @@ async function captureGif(port, url, tmp, outputs) {
         break;
       }
     }
-    if (!ok) console.warn('WARNING: GIF is larger than 5MB even at the smallest preset.');
+    if (!ok) console.warn('WARNING: GIF is larger than 8MB even at the smallest preset.');
     outputs.push(out);
     return result;
   } finally {
