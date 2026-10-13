@@ -104,6 +104,6 @@ Work is organized as numbered task specs in [`docs/tasks`](docs/tasks), each bui
 - Code: [Apache License 2.0](LICENSE). See [`NOTICE`](NOTICE).
 - Font: Geist, SIL Open Font License 1.1, bundled with its license at `games/stack-up/public/licenses/`.
 - Audio: none bundled; all sounds are generated at runtime.
-- DevCol logo (`games/stack-up/src/assets/devcol-logo.png`): owned by DevCol; the logo and brand are not licensed for reuse under Apache-2.0 (see [`docs/assets.md`](docs/assets.md)).
+- DevCol logo (`games/stack-up/src/assets/devcol-logo.png` and its dark-background variant `devcol-logo-dark.png`): owned by DevCol; the logo and brand are not licensed for reuse under Apache-2.0 (see [`docs/assets.md`](docs/assets.md)).
 
 Only assets that are free for commercial use are accepted, and each one is recorded in [`docs/assets.md`](docs/assets.md).
