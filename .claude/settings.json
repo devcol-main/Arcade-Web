@@ -16,7 +16,6 @@
       "Bash(git checkout -b:*)"
     ],
     "deny": [
-      "Bash(git push:*)",
       "Bash(git reset --hard:*)",
       "Bash(rm -rf:*)",
       "Bash(npm publish:*)"

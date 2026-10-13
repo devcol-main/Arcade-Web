@@ -65,7 +65,7 @@ scripts/
 
 ## 커밋 규칙
 - 하위 작업 하나 = 커밋 하나, 영어 명령형 메시지.
-- `git push`, 브랜치 삭제, 히스토리 수정 금지.
+- 브랜치 삭제, 히스토리 수정(reset --hard, rebase, force push 등) 금지. `git push`는 사용자가 요청했을 때만 하고, 일반 push(비강제)만 한다.
 
 ## 검사
 - `npm run check` = `tsc --noEmit` + `vitest run`
