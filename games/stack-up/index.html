@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Stack Up</title>
+<link rel="icon" type="image/png" href="./src/assets/devcol-logo.png">
 <style>
   html, body { margin: 0; height: 100%; background: #07020f; overflow: hidden; overscroll-behavior: none; touch-action: none; }
   /* fixed + inset: iOS 주소창/iframe 높이 변화에 100vh 대신 실제 보이는 영역을 따른다 */
@@ -14,7 +15,10 @@
 <canvas id="game" tabindex="-1"></canvas>
 <div id="ui" class="ui" data-phase="title">
   <div class="col">
-    <div class="logo">STACK UP</div>
+    <div class="brand">
+      <img class="brand-logo" src="./src/assets/devcol-logo-dark.png" alt="DevCol logo" width="256" height="256" draggable="false">
+    </div>
+    <div class="logo" aria-hidden="true">STACK UP</div>
     <button id="mute" class="mute" type="button" data-ui aria-pressed="false">Sound: on</button>
     <div id="score" class="score">0</div>
     <div id="hud-best" class="hud-best" hidden>BEST 0</div>
