@@ -91,6 +91,9 @@ The builds are static files. After `npm run build`, copy a game into the site re
 ```bash
 npm run build -- stack-up
 scripts/copy-to-site.sh stack-up   # -> ../devcol-site/devcol-build/docs/public/games/stack-up
+
+npm run build -- bug-squash
+scripts/copy-to-site.sh bug-squash # -> ../devcol-site/devcol-build/docs/public/games/bug-squash
 ```
 
 Then embed it from a VitePress page with an `<iframe>`.
