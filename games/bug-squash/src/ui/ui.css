@@ -25,6 +25,8 @@
   /* 열 바깥 좌우 여백과, 그 여백이 흡수하지 못한 오른쪽 safe-area(노치). 오른쪽 버튼/라이프의 오프셋에 더한다 */
   --gutter: max(0px, calc((100vw - var(--u) * 100) / 2));
   --safe-r: max(0px, calc(env(safe-area-inset-right, 0px) - var(--gutter)));
+  /* 왼쪽도 같은 방식: 열 바깥 여백이 흡수하지 못한 왼쪽 safe-area만 로고/BEST 오프셋에 더한다 */
+  --safe-l: max(0px, calc(env(safe-area-inset-left, 0px) - var(--gutter)));
   --below-mute: 52px; /* Sound 버튼 높이(44px) + 간격. 옵션 버튼과 라이프가 함께 쓴다 */
   position: fixed;
   overscroll-behavior: none;
@@ -52,22 +54,25 @@
    주의: HUD 요소의 크기/위치를 바꾸면 src/view/layout.ts 의 hudContentBottom(미러)도 함께 수정할 것. */
 /* 좌상단 브랜드: DevCol 로고(모든 화면). 입력은 가로채지 않는다. */
 .brand {
-  position: absolute; left: calc(var(--u) * 4 + env(safe-area-inset-left, 0px)); top: calc(var(--u) * 3 + env(safe-area-inset-top, 0px));
+  position: absolute; left: calc(var(--u) * 4 + var(--safe-l)); top: calc(var(--u) * 3 + env(safe-area-inset-top, 0px));
   display: flex; align-items: center; pointer-events: none; z-index: 1;
 }
 /* 플레이 중 BUG SQUASH 문구: 열 가운데, 점수 바로 위. 장식이라 aria-hidden.
    HUD 전체(문구, 점수, 배율, 라이프)는 viewConfig HUD 띠(화면 높이 17%, 104~150px) 안에 들어가야 한다.
    --u <= 0.5625vh 이므로 27u <= 0.152 * 화면 높이 < 띠 높이: 아래 값들은 모두 27u 이내. */
+/* 바꾸면 src/ui/hud.ts 의 MUTE_LAYOUT/muteLogoGapU(미러)와 src/view/layout.ts 의 hudContentBottom도 수정할 것. */
 .logo {
   position: absolute; left: 0; right: 0; top: calc(var(--u) * 2.5 + env(safe-area-inset-top, 0px)); text-align: center; pointer-events: none;
   font-size: calc(var(--u) * 3.4); line-height: 1.1; letter-spacing: 0.04em; color: var(--term-green); opacity: 0.6; white-space: nowrap;
 }
+/* 바꾸면 src/view/layout.ts 의 hudContentBottom(미러)도 수정할 것. */
 .score {
   position: absolute; left: 0; right: 0; top: calc(var(--u) * 6.4 + env(safe-area-inset-top, 0px));
   text-align: center; font-size: calc(var(--u) * 9.5); line-height: 1; color: var(--term-green);
   text-shadow: 0 0 calc(var(--u) * 1) var(--term-glow);
 }
 /* 콤보 배율: x1이면 투명(자리 유지). 배율이 오를 때 앰버 반전 블록으로 2~3회 깜박인다. */
+/* 바꾸면 src/view/layout.ts 의 hudContentBottom(미러: 16.4u + 4.4u*1.1)도 수정할 것. */
 .combo {
   position: absolute; left: 50%; transform: translateX(-50%); padding: 0 0.3em; top: calc(var(--u) * 16.4 + env(safe-area-inset-top, 0px));
   text-align: center; white-space: nowrap; font-size: calc(var(--u) * 4.4); line-height: 1.1; color: var(--term-amber); opacity: 0;
@@ -84,7 +89,7 @@
 
 /* BEST: 로고 아래 왼쪽 (점수 영역과 겹치지 않는다) */
 .hud-best {
-  position: absolute; left: calc(var(--u) * 4 + env(safe-area-inset-left, 0px)); top: calc(var(--u) * 14.5 + env(safe-area-inset-top, 0px));
+  position: absolute; left: calc(var(--u) * 4 + var(--safe-l)); top: calc(var(--u) * 14.5 + env(safe-area-inset-top, 0px));
   font-size: calc(var(--u) * 3); font-weight: 600; color: var(--term-amber); white-space: nowrap;
 }
 .hud-best[hidden] { display: none; }
@@ -93,6 +98,7 @@
 /* 라이프: 우상단, Sound 버튼 바로 아래(플레이 중 숨겨지는 옵션 버튼 자리), 오른쪽 정렬. 정사각형 블록 3개.
    Sound 높이 + 간격(--below-mute)은 .options-btn 과 같은 값을 쓴다. Sound 문구 폭이 바뀌어도 세로로 떨어져 있어 겹치지 않는다.
    띠 안 확인: 위 = 3u + 52px + 16~18px (375x667 약 80px < 113, 800x600 약 79px < 104). */
+/* 바꾸면 src/view/layout.ts 의 hudContentBottom(미러: 3u + 52px + max(16px, 4.4u))도 수정할 것. */
 .lives {
   position: absolute; right: calc(var(--u) * 3 + var(--safe-r)); top: calc(var(--u) * 3 + var(--below-mute) + env(safe-area-inset-top, 0px));
   display: flex; justify-content: flex-end; gap: calc(var(--u) * 1.6); pointer-events: none;
@@ -104,11 +110,11 @@
 .life-fill { position: absolute; inset: 0; background: var(--term-green); opacity: 0; box-shadow: 0 0 4px var(--term-glow); }
 .life.full .life-fill { opacity: 1; }
 .shard { position: absolute; width: 28%; height: 28%; background: var(--term-green); opacity: 0; }
-/* 잃는 순간: 채움이 사라지고 작은 사각 조각 4개가 흩어지며 페이드 */
+/* 잃는 순간: 채움이 사라지고 작은 사각 조각 4개가 옆/아래로 흩어지며 페이드 (위쪽 성분 없음: 바로 위 Sound 버튼을 덮지 않게) */
 .life.break .life-fill { animation: life-gone 0.4s steps(4, end); }
 .life.break .shard { animation: shard-fly 0.45s steps(5, end); }
-.life.break .s1 { left: 10%; top: 10%; --dx: -300%; --dy: -300%; }
-.life.break .s2 { right: 10%; top: 10%; --dx: 300%; --dy: -260%; }
+.life.break .s1 { left: 10%; top: 10%; --dx: -300%; --dy: 40%; }
+.life.break .s2 { right: 10%; top: 10%; --dx: 300%; --dy: 40%; }
 .life.break .s3 { left: 10%; bottom: 10%; --dx: -260%; --dy: 300%; }
 .life.break .s4 { right: 10%; bottom: 10%; --dx: 300%; --dy: 260%; }
 @keyframes life-gone { 0% { opacity: 1; } 100% { opacity: 0; } }
@@ -125,6 +131,7 @@
 .ui.reduced .life.break .life-fill, .ui.reduced .life.break .shard, .ui.reduced .life.restore .life-fill { animation: none; }
 
 /* 각진 터미널 버튼: 호버/포커스 때 반전 */
+/* 바꾸면 src/ui/hud.ts 의 MUTE_LAYOUT/muteLogoGapU(미러)도 수정할 것 (글자 크기, 패딩, right, 테두리). */
 .mute, .options-btn {
   position: absolute; right: calc(var(--u) * 3 + var(--safe-r)); top: calc(var(--u) * 3 + env(safe-area-inset-top, 0px));
   min-width: 44px; min-height: 44px; padding: 0 calc(var(--u) * 3);
