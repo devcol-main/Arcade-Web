@@ -3,7 +3,8 @@
 > 메인 세션(Opus)은 계획과 조율만 하고, 구현은 서브에이전트에게 맡긴다.
 
 ## 프로젝트 개요
-- devcol.net에 올릴 **웹 미니게임** 모음 (Stack Up, Bug Squash). Unity 게임은 별도 저장소 `devcol-arcade`.
+- devcol.net에 올릴 **웹 미니게임** 모음 (현재 Stack Up). Unity 게임은 별도 저장소 `devcol-arcade`.
+- Bug Squash는 독립 리포(devcol-main/Bug-Squash)로 이전됨. 이 리포의 shared 형식(플레이어 프로필, 리더보드)은 Bug Squash와 런타임에 공유되므로 바꿀 때 그쪽 `src/shared`와 맞춘다.
 - 스택: TypeScript, Canvas 2D, WebAudio, Vite, Vitest. 외부 게임 엔진/프레임워크 없이 시작한다.
 - 빌드 결과는 사이트 저장소의 `docs/public/games/<game>/`로 복사해서 VitePress 페이지에 임베드한다. (GitHub Pages 호스팅)
 - 비주얼: Neon 스타일. 세부는 각 Task 명세.
