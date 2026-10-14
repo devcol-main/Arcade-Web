@@ -1,4 +1,4 @@
-export type { LeaderboardEntry, LeaderboardService, LeaderboardSubmission } from './types';
+export type { LeaderboardEntry, LeaderboardService, LeaderboardSubmission, ScoreEntry } from './types';
 export {
   LocalLeaderboardService,
   normalizeNickname,
@@ -6,4 +6,4 @@ export {
   MAX_NICKNAME_LENGTH,
   DEFAULT_NICKNAME,
 } from './LocalLeaderboardService';
-export type { StorageLike } from './LocalLeaderboardService';
+export type { StorageLike, StatsSanitizer, LocalLeaderboardOptions } from './LocalLeaderboardService';
