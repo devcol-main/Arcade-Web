@@ -102,6 +102,10 @@ Then embed it from a VitePress page with an `<iframe>`.
 
 Work is organized as numbered task specs in [`docs/tasks`](docs/tasks), each built on a `task/NNN-<name>` branch in small sub-tasks (core + tests, view, effects/audio, UI), each one checked with `npm run check` and reviewed before it is committed. [`docs/pipeline-log.md`](docs/pipeline-log.md) records every sub-task, and [`CLAUDE.md`](CLAUDE.md) holds the project rules (code conventions, loop limits, commit rules).
 
+CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs on every pull request to `main` and every push to `main`: `npm ci`, `npm run check`, `npm run build`, then [`scripts/verify-build.sh`](scripts/verify-build.sh), which fails if a built game is over the size limit or a production bundle contains a dev-only hook. Run the same steps locally with `npm run build && bash scripts/verify-build.sh`.
+
+[![CI](https://github.com/devcol-main/Arcade-Web/actions/workflows/ci.yml/badge.svg)](https://github.com/devcol-main/Arcade-Web/actions/workflows/ci.yml)
+
 ## Licenses
 
 - Code: [Apache License 2.0](LICENSE). See [`NOTICE`](NOTICE).
