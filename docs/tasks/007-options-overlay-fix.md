@@ -15,10 +15,10 @@
 - README 스크린샷 `docs/media/options.png`를 재생성(`npm run media`)해 반영.
 
 ## 완료 조건
-- [ ] `npm run check` 통과
-- [ ] 옵션 패널 뒤 문구가 겹쳐 보이지 않음(타이틀과 게임 오버 모두 캡처로 확인)
-- [ ] 패널 닫기 후 화면 복귀, 입력 동작 불변
-- [ ] `docs/media/options.png` 갱신
+- [x] `npm run check` 통과
+- [x] 옵션 패널 뒤 문구가 겹쳐 보이지 않음(타이틀과 게임 오버 모두 캡처로 확인)
+- [x] 패널 닫기 후 화면 복귀, 입력 동작 불변
+- [x] `docs/media/options.png` 갱신
 
 ## 범위 밖
 - 옵션 항목 추가/변경, 다른 화면 디자인 변경
