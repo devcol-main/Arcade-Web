@@ -10,7 +10,8 @@
 
 ## 출발점
 - 시안 없음. Stack Up(`games/stack-up/`, Task 001~003 결과)의 구조, Neon 렌더링 방식(글로우 스프라이트 캐시), 합성 BGM/SFX, 옵션 패널, 최고 기록, DevCol 로고 배치, 리더보드 Mock을 그대로 따른다
-- 두 게임에서 쓰이게 되는 코드는 첫 하위 작업에서 `shared/`로 옮긴다 (`CLAUDE.md` 규칙: 두 게임 이상에서 쓰일 때만 shared)
+- **Stack Up(`games/stack-up/`)은 건드리지 않는다.** 필요한 코드와 에셋(rng, 글로우 스프라이트, 별 패럴랙스, 오디오 구조, 기록/옵션, 폰트, 로고)은 `games/bug-squash/` 안에 복사해서 게임별로 따로 둔다
+- `shared/`는 기존 `shared/leaderboard`만 쓴다 (나중에 대시보드 랭킹에서 게임별 기록을 확인하는 용도). 그 밖의 공통 모듈 추출은 하지 않는다
 
 ## 테마
 - 칸 = 코드가 돌아가는 슬롯, 버그 = 잡아야 할 버그, 기능 = 건드리면 안 되는 정상 기능 (콘셉트만, **오브젝트 안 글자 없음**)
@@ -36,10 +37,10 @@ Stack Up 팔레트를 그대로 쓰고, 골든만 추가한다.
 | 라이프 | 우상단 하트 대신 **다이아몬드 3개** `#FF7AD9` (잃으면 외곽선만 남음) |
 | 로고 | Stack Up과 동일: 모든 화면 좌상단에 DevCol 로고(`devcol-logo-dark.png`), 플레이 중 `BUG SQUASH` 문구는 상단 가운데(점수 바로 위), `#FF7AD9` |
 | 게임 오버 | 화면 어둡게, `GAME OVER` 핑크 글로우, 점수 시안 글로우, `BEST n` `#C9A8FF`, `Tap to retry` `#FF7AD9` |
-| 폰트 | Geist (OFL). Stack Up과 같은 woff2 파일을 shared에서 사용 |
+| 폰트 | Geist (OFL). Stack Up과 같은 woff2 파일을 bug-squash에 복사해서 사용 (라이선스 파일 포함) |
 
 ## 디테일
-- **움직이는 배경:** Stack Up과 같은 별/입자 패럴랙스 2~3겹, 그리드 은은한 깜박임 (shared로 옮긴 모듈 재사용)
+- **움직이는 배경:** Stack Up과 같은 별/입자 패럴랙스 2~3겹, 그리드 은은한 깜박임 (Stack Up 코드를 bug-squash에 복사해서 사용)
 - **VFX:**
   - 버그 잡기: 짧은 찌그러짐(squash) 후 사라짐 + 버그 색 입자 튐 + 칸 외곽선 플래시
   - 단단한 버그 1타: 금 간 표시 + 작은 흔들림
@@ -121,23 +122,21 @@ games/bug-squash/
   src/audio/     # WebAudio 효과음
   src/ui/        # 타이틀, HUD(점수/콤보/라이프/BEST), 게임 오버, 닉네임 입력, 리더보드 표시, 옵션 패널
   src/input/     # Pointer Events, 좌표 → 칸 매핑, 진동
+  src/assets/    # Geist woff2, DevCol 로고 PNG (Stack Up에서 복사)
   src/main.ts    # 게임 루프
+  public/licenses/  # Geist OFL 라이선스 (Stack Up에서 복사)
   tests/         # Vitest
 shared/
-  leaderboard/   # 기존 (game_id만 'bug-squash'로)
-  rng/           # Stack Up core/rng.ts 이동
-  render/        # 글로우 스프라이트 캐시, 별 패럴랙스/그리드 (Stack Up view/glowSprites, stars 등에서 공통 부분)
-  audio/         # AudioContext 언락, BGM/SFX 버스와 볼륨 설정, 합성 루프 스케줄러 (Stack Up AudioManager의 공통 부분)
-  ui/            # 기록(BestScore, Nickname, StorageLike 래퍼), 옵션 패널 공통 로직, frameClock, 폰트 로더
-  assets/        # Geist woff2, DevCol 로고 PNG (Stack Up src/assets에서 이동)
+  leaderboard/   # 기존 그대로 사용 (game_id만 'bug-squash'로). 유일한 공통 모듈
 ```
+- rng, 글로우 스프라이트 캐시, 별 패럴랙스/그리드, AudioContext 언락과 BGM/SFX 버스, 기록/옵션/frameClock/폰트 로더는 Stack Up 코드를 bug-squash 안에 복사해서 쓴다. `games/stack-up/`은 수정하지 않는다
 - core의 입력은 `tap(cellIndex)`, 시간은 `update(dt)`. 결과는 이벤트 목록(잡음, 놓침, 기능 탭, 라이프 변화, 확장 등)으로 돌려주고 view/audio가 그걸 보고 연출한다
 - **글로우는 매 프레임 shadowBlur로 그리지 않고**, 시작할 때 오브젝트 종류별/색별 스프라이트를 오프스크린 캔버스에 미리 그려서 재사용. 스케일 애니메이션은 drawImage 크기로 처리
 - 입자와 점수 팝업은 풀링
 - 리더보드 서버 연동은 이 Task 범위 밖. 인터페이스 + localStorage Mock만
 
 ## 하위 작업 순서 (권장)
-1. 공통 모듈 추출: 위 `shared/` 목록 중 **두 게임에서 그대로 쓰이는 부분만** 옮기고 Stack Up이 이를 쓰도록 수정 (Stack Up 테스트 그대로 통과, 동작/빌드 결과 변화 없음, Stack Up 전용 수치와 연출은 그대로 둠) + `games/bug-squash` 골격, `scripts/build.mjs`/`dev.mjs`에 게임 추가
+1. `games/bug-squash` 골격: 필요한 기반 코드와 에셋을 Stack Up에서 복사 (`games/stack-up/`은 수정하지 않음), `shared/leaderboard` 연결 준비, `npm run dev -- bug-squash`/`npm run build`에서 동작 확인
 2. core 로직 + 테스트 (출현, 노출, 판정, 라이프, 점수/콤보, 난이도 곡선, 보드 확장, 시드)
 3. 입력: Pointer Events, 멀티터치, 좌표 → 칸 매핑 + 테스트, 진동
 4. view: 보드 레이아웃(3×3/4×4), 칸, 오브젝트 스프라이트, 출현/퇴장 애니메이션
@@ -172,7 +171,7 @@ shared/
 - [ ] 버그와 기능이 한눈에 구별됨 (작은 화면, 색약 고려해 모양 차이만으로도 구별 가능한지)
 - [ ] 난이도: 처음 하는 사람 생존 60~120초 근처, 4×4 전환이 갑작스럽지 않음
 - [ ] 사운드 볼륨 밸런스, 음소거 동작, Android에서 진동 동작과 토글
-- [ ] Stack Up이 공통 모듈 추출 후에도 이전과 똑같이 동작
+- [ ] Stack Up이 이전과 똑같이 동작 (`games/stack-up/` 변경 없음은 git diff로 자동 확인)
 - [ ] VitePress 페이지에 임베드해서 로컬(`npm run docs:dev`)로 확인
 
 ## 범위 밖
