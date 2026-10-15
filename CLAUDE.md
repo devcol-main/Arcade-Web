@@ -3,31 +3,21 @@
 > 메인 세션(Opus)은 계획과 조율만 하고, 구현은 서브에이전트에게 맡긴다.
 
 ## 프로젝트 개요
-- devcol.net에 올릴 **웹 미니게임** 모음 (현재 Stack Up). Unity 게임은 별도 저장소 `devcol-arcade`.
-- Bug Squash는 독립 리포(devcol-main/Bug-Squash)로 이전됨. 이 리포의 shared 형식(플레이어 프로필, 리더보드)은 Bug Squash와 런타임에 공유되므로 바꿀 때 그쪽 `src/shared`와 맞춘다.
-- 스택: TypeScript, Canvas 2D, WebAudio, Vite, Vitest. 외부 게임 엔진/프레임워크 없이 시작한다.
-- 빌드 결과는 사이트 저장소의 `docs/public/games/<game>/`로 복사해서 VitePress 페이지에 임베드한다. (GitHub Pages 호스팅)
-- 비주얼: Neon 스타일. 세부는 각 Task 명세.
-- 게임 안의 모든 텍스트는 영어. 주석과 문서는 한국어 가능.
+- 이 리포에는 게임 코드가 없다. 웹 미니게임은 각자 독립 리포로 이전됨: [devcol-main/Stack-Up](https://github.com/devcol-main/Stack-Up), [devcol-main/Bug-Squash](https://github.com/devcol-main/Bug-Squash). Unity 게임은 별도 저장소 `devcol-arcade`.
+- 역할: 두 게임 리포로 가는 안내 + 공유 형식(`shared/`)의 기준 리포. `shared/leaderboard`, `shared/player`는 각 게임 리포의 `src/shared`에 복사되어 같은 도메인에서 런타임에 공유되므로, **형식(플레이어 프로필, 리더보드)을 바꿀 때는 이 리포와 두 게임 리포의 `src/shared`를 함께 맞춘다.** `shared/ranking`(통합 랭킹 집계)은 여기에만 있다.
+- 스택: TypeScript, Vitest.
+- 주석과 문서는 한국어 가능. 아래 코드 규칙 중 이 리포에는 `shared/`에 해당하는 항목만 적용된다.
 
 ## 폴더 구조
 ```
-games/<game>/
-  index.html
-  src/core/     # 순수 로직. DOM, Canvas, Audio, window, localStorage 참조 금지
-  src/view/     # Canvas 렌더링, 카메라, 배경, VFX
-  src/audio/    # WebAudio
-  src/ui/       # 화면 흐름, HTML 오버레이
-  src/main.ts
-  tests/        # Vitest
 shared/
   leaderboard/  # LeaderboardService 인터페이스, LocalLeaderboardService
-  (공통 유틸: rng, 입력, 오디오 언락 등은 두 게임 이상에서 쓰일 때만 여기로)
+  player/       # 플레이어 프로필
+  ranking/      # 통합 랭킹 집계
 docs/
   tasks/NNN-*.md
   pipeline-log.md
-scripts/
-  copy-to-site.sh   # dist/<game> → ../devcol-site/devcol-build/docs/public/games/<game>
+  assets.md
 ```
 
 ## 반복 한도 (Loop Limits)
@@ -70,7 +60,6 @@ scripts/
 
 ## 검사
 - `npm run check` = `tsc --noEmit` + `vitest run`
-- `npm run build` 후 용량 확인: `du -sh dist/<game>`
 
 ## pipeline-log.md 형식
 ```

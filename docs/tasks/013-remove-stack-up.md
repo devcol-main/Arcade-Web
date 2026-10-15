@@ -26,7 +26,7 @@
 5. 유지: `shared/`와 그 테스트(형식 변경 금지), `LICENSE`, `.claude/agents`, `.claude/settings.json`, `.nvmrc`, 로컬 브랜치(삭제 금지).
 
 ## 완료 조건
-- [ ] `npm ci && npm run check` 통과(shared 테스트만 남음)
-- [ ] `git grep`으로 `games/stack-up`·삭제한 스크립트 참조가 기록(docs/tasks, pipeline-log)과 이전 안내 문구 외에 없음
-- [ ] README의 게임 리포 링크가 동작
+- [x] `npm ci && npm run check` 통과(shared 테스트만 남음)
+- [x] `git grep`으로 `games/stack-up`·삭제한 스크립트 참조가 기록(docs/tasks, pipeline-log)과 이전 안내 문구 외에 없음
+- [x] README의 게임 리포 링크가 동작
 - [ ] PR의 CI 통과

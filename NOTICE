@@ -2,10 +2,3 @@ devcol-arcade-web
 Copyright 2026 DevCol
 
 This product is licensed under the Apache License, Version 2.0 (see LICENSE).
-
-Third-party assets bundled with this project:
-
-- Geist (variable font, latin subset)
-  Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font)
-  Licensed under the SIL Open Font License, Version 1.1.
-  License text: games/stack-up/public/licenses/Geist-OFL-LICENSE.txt

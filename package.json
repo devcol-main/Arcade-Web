@@ -4,11 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/dev.mjs",
-    "build": "node scripts/build.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "media": "node scripts/capture-media.mjs",
     "check": "tsc --noEmit && vitest run"
   },
   "devDependencies": {

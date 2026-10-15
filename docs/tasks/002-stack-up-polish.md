@@ -1,5 +1,7 @@
 # Task 002: Stack Up 개선 (BGM, 마일스톤, 옵션, VFX)
 
+> 이 게임은 [devcol-main/Stack-Up](https://github.com/devcol-main/Stack-Up)으로 이전됨 (2026-10-15). 경로는 당시 모노레포 기준.
+
 상태: 확정 (구현 시작 가능)
 작성일: 2026-10-13
 선행: Task 001 (브랜치 `task/001-stack-up` 위에서 진행)

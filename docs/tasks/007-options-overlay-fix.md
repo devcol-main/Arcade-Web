@@ -1,5 +1,7 @@
 # Task 007: 옵션 패널 뒤 문구 비침 수정
 
+> 이 게임은 [devcol-main/Stack-Up](https://github.com/devcol-main/Stack-Up)으로 이전됨 (2026-10-15). 경로는 당시 모노레포 기준.
+
 상태: 확정 (구현 시작 가능)
 작성일: 2026-10-14
 선행: Task 003 (브랜치 `task/003-branding-and-media` 위에서 진행, PR #2 진행 중)
