@@ -1,5 +1,7 @@
 # Task 003: DevCol 로고 + README 미디어
 
+> 이 게임은 [devcol-main/Stack-Up](https://github.com/devcol-main/Stack-Up)으로 이전됨 (2026-10-15). 경로는 당시 모노레포 기준.
+
 상태: 확정 (구현 시작 가능)
 작성일: 2026-10-13
 선행: Task 002 (브랜치 `task/002-stack-up-polish` 위에서 진행, PR #1 진행 중)
