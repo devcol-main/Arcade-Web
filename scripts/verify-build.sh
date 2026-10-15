@@ -5,7 +5,9 @@ set -euo pipefail
 
 # --- 설정 (한 곳) ---
 MAX_KB=300                          # 게임별 dist 크기 한도 (KB)
-DEV_HOOKS=("__stackUp" "__bugSquash") # 프로덕션 번들에 있으면 안 되는 개발 전용 훅
+# 프로덕션 번들에 있으면 안 되는 개발 전용 훅. __bugSquash는 Bug Squash 이전 후 번들이 없어 영향 없지만,
+# 오래된 dist/bug-squash가 남아 있는 로컬에서도 같은 기준으로 검사되도록 남겨 둔다.
+DEV_HOOKS=("__stackUp" "__bugSquash")
 DIST_DIR="${DIST_DIR:-dist}"
 
 cd "$(dirname "$0")/.."

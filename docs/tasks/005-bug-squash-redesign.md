@@ -1,5 +1,7 @@
 # Task 005: Bug Squash 컨셉 재설계 (레트로 터미널) + 리더보드 게임별 분리·통합 랭킹 기반
 
+> 이 게임은 [devcol-main/Bug-Squash](https://github.com/devcol-main/Bug-Squash)로 이전됨 (2026-10-15). 경로는 당시 모노레포 기준.
+
 상태: 확정 (구현 시작 가능)
 작성일: 2026-10-14
 플랫폼: 웹 (TypeScript + Canvas 2D). 저장소 `devcol-arcade-web`, 규칙은 `CLAUDE.md`

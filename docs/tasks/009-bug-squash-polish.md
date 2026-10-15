@@ -1,5 +1,7 @@
 # Task 009: Bug Squash 마무리 정리 (이월 항목)
 
+> 이 게임은 [devcol-main/Bug-Squash](https://github.com/devcol-main/Bug-Squash)로 이전됨 (2026-10-15). 경로는 당시 모노레포 기준.
+
 상태: 확정 (사용자 요청: 이월 항목 진행)
 작성일: 2026-10-15
 플랫폼: 웹 (TypeScript + Canvas 2D). 저장소 `devcol-arcade-web`, 규칙은 `CLAUDE.md`
